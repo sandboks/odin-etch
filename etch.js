@@ -1,11 +1,11 @@
-function createGrid() {
+function createGrid(numSquares) {
     const container = document.querySelector('.gridContainer');
     
-    for (let h = 0; h < 16; h++) {
+    for (let h = 0; h < numSquares; h++) {
         let newRow = document.createElement("div");
         newRow.className = "gridRow";
             
-            for (let w = 0; w < 16; w++) {
+            for (let w = 0; w < numSquares; w++) {
                 //continue;
                 
                 let gridSquare = document.createElement("div");
@@ -15,6 +15,14 @@ function createGrid() {
                 gridSquare.appendChild(node);
 
                 newRow.appendChild(gridSquare);
+
+                gridSquare.addEventListener("mouseover", () => {
+                    gridSquare.style.backgroundColor = "black";
+                });
+
+                gridSquare.addEventListener("mouseout", () => {
+                    gridSquare.style.backgroundColor = "white";
+                });
             }
             
 
@@ -51,4 +59,4 @@ function createGrid() {
     */
 }
 
-createGrid();
+createGrid(16);
