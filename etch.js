@@ -6,7 +6,7 @@ function createGrid() {
         newRow.className = "gridRow";
             
             for (let w = 0; w < 16; w++) {
-                continue;
+                //continue;
                 
                 let gridSquare = document.createElement("div");
                 gridSquare.className = "gridSquare";
