@@ -105,7 +105,7 @@ function destroyGrid() {
 
     squares.forEach((square) => {
         // to remove the event listeners, first replace the square with a clone of itself
-        square.replaceWith(square.cloneNode(true));     
+        //square.replaceWith(square.cloneNode(true)); // apparently this is redundant, so I'll leave it out
         square.remove();
     })
 
