@@ -1,6 +1,7 @@
 let mouseDown = false;
-document.body.onmousedown = function() { 
+document.body.onmousedown = (e) => { 
     mouseDown = true;
+    e.preventDefault(); // prevents drag event from occurring here!
 }
 document.body.onmouseup = function() {
     mouseDown = false;
