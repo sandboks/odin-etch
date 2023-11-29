@@ -1,3 +1,11 @@
+let mouseDown = false;
+document.body.onmousedown = function() { 
+    mouseDown = true;
+}
+document.body.onmouseup = function() {
+    mouseDown = false;
+}
+
 let button = document.querySelector("#RESIZE");
 
 button.addEventListener('click', () => {
@@ -34,12 +42,24 @@ function createGrid(numSquares) {
                 newRow.appendChild(gridSquare);
 
                 gridSquare.addEventListener("mouseover", () => {
-                    gridSquare.style.backgroundColor = "black";
+                    if (gridSquare.style.backgroundColor != "black") {
+                        gridSquare.style.backgroundColor = "white";
+                    }
+                    //gridSquare.style.borderColor = "white";
+                    //gridSquare.style.backgroundColor = "black";
+                    if (mouseDown) {
+                        gridSquare.style.backgroundColor = "black";
+                    }
                 });
 
                 gridSquare.addEventListener("mouseout", () => {
-                    gridSquare.style.backgroundColor = "white";
+                    if (gridSquare.style.backgroundColor != "black")
+                        gridSquare.style.backgroundColor = "silver";
                 });
+
+                gridSquare.addEventListener("mousedown", () => {
+                    gridSquare.style.backgroundColor = "black";
+                })
             }
             
 
