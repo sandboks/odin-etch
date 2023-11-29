@@ -10,6 +10,9 @@ let button = document.querySelector("#RESIZE");
 
 button.addEventListener('click', () => {
     let newSize = prompt("Enter new grid size [0-128]");
+    if (newSize == null)
+        return;
+
     newSize = parseInt(newSize);
     if (isNaN(newSize) || newSize > 128 || newSize < 0) {
         alert("Invalid input. Please enter an integer number [0-128]");
@@ -30,7 +33,6 @@ function createGrid(numSquares) {
         newRow.className = "gridRow";
             
             for (let w = 0; w < numSquares; w++) {
-                //continue;
                 
                 let gridSquare = document.createElement("div");
                 gridSquare.className = "gridSquare";
