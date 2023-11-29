@@ -7,6 +7,7 @@ document.body.onmouseup = function() {
 }
 
 let gridOn = true;
+let canClear = false;
 
 let button = document.querySelector("#RESIZE");
 
@@ -24,19 +25,25 @@ button.addEventListener('click', () => {
     }
 });
 
-button = document.querySelector("#GRIDTOGGLE");
-button.addEventListener('click', () => {
+let gridButton = document.querySelector("#GRIDTOGGLE");
+gridButton.addEventListener('click', () => {
     gridOn = !gridOn;
-    button.textContent = "Grid: " + (gridOn ? "ON" : "OFF");
-    button.className = (gridOn ? "" : "buttonOff");
+    gridButton.textContent = "Grid: " + (gridOn ? "ON" : "OFF");
+    gridButton.className = (gridOn ? "" : "buttonOff");
 
     SetGridDisplay(gridOn);
+})
+
+let clearButton = document.querySelector("#CLEAR");
+clearButton.addEventListener('click', () => {
+    ClearGrid();
 })
 
 function createGrid(numSquares) {
     const container = document.querySelector('.gridContainer');
 
     destroyGrid();
+    SetClearButtonVisibility(false);
     
     for (let h = 0; h < numSquares; h++) {
         let newRow = document.createElement("div");
@@ -59,26 +66,36 @@ function createGrid(numSquares) {
                     if (gridSquare.style.backgroundColor != "black") {
                         gridSquare.style.backgroundColor = "white";
                     }
-                    //gridSquare.style.borderColor = "white";
-                    //gridSquare.style.backgroundColor = "black";
                     if (mouseDown) {
-                        gridSquare.style.backgroundColor = "black";
+                        MarkSquare(gridSquare);
                     }
                 });
 
                 gridSquare.addEventListener("mouseout", () => {
+                    
                     if (gridSquare.style.backgroundColor != "black")
-                        gridSquare.style.backgroundColor = "silver";
+                        MarkSquare(gridSquare, false);
+                        //gridSquare.style.backgroundColor = "silver";
                 });
 
                 gridSquare.addEventListener("mousedown", () => {
-                    gridSquare.style.backgroundColor = "black";
+                    MarkSquare(gridSquare);
                 })
             }
-            
-
         container.appendChild(newRow);
     }
+}
+
+function MarkSquare(square, isBlack = true) {
+    square.style.backgroundColor = (isBlack ? "black" : "silver");
+    if (isBlack && canClear == false) {
+        SetClearButtonVisibility(true);
+    }
+}
+
+function SetClearButtonVisibility(b) {
+    canClear = b;
+    clearButton.className = (canClear ? "" : "buttonOff");
 }
 
 function destroyGrid() {
@@ -104,4 +121,27 @@ function SetGridDisplay() {
     })
 }
 
-createGrid(4);
+function ClearGrid() {
+    let squares = document.querySelectorAll('.gridSquare');
+
+    squares.forEach((square) => {
+        square.style.backgroundColor = "silver";
+    })
+
+    SetClearButtonVisibility(false);
+}
+
+function SetInitialFace() {
+    let squares = document.querySelectorAll('.gridSquare');
+
+    const blackSquares = ["1/2", "2/2", "3/2", "1/5", "2/5", "3/5", "5/1", "6/2", "6/3", "6/4", "6/5"];
+
+    squares.forEach((square) => {
+        if (blackSquares.includes(square.id)) {
+            MarkSquare(square);
+        }
+    })
+}
+
+createGrid(8);
+SetInitialFace();
