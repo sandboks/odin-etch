@@ -6,6 +6,8 @@ document.body.onmouseup = function() {
     mouseDown = false;
 }
 
+let gridOn = true;
+
 let button = document.querySelector("#RESIZE");
 
 button.addEventListener('click', () => {
@@ -20,8 +22,16 @@ button.addEventListener('click', () => {
     else {
         createGrid(newSize);
     }
-    
 });
+
+button = document.querySelector("#GRIDTOGGLE");
+button.addEventListener('click', () => {
+    gridOn = !gridOn;
+    button.textContent = "Grid: " + (gridOn ? "ON" : "OFF");
+    button.className = (gridOn ? "" : "buttonOff");
+
+    SetGridDisplay(gridOn);
+})
 
 function createGrid(numSquares) {
     const container = document.querySelector('.gridContainer');
@@ -42,7 +52,9 @@ function createGrid(numSquares) {
                 gridSquare.appendChild(node);
 
                 newRow.appendChild(gridSquare);
+                
 
+                gridSquare.style.border = (gridOn ? "1px solid gray" : "0px");
                 gridSquare.addEventListener("mouseover", () => {
                     if (gridSquare.style.backgroundColor != "black") {
                         gridSquare.style.backgroundColor = "white";
@@ -81,6 +93,14 @@ function destroyGrid() {
     let rows = document.querySelectorAll(".gridRow");
     rows.forEach((row) => {
         row.remove();
+    })
+}
+
+function SetGridDisplay() {
+    let squares = document.querySelectorAll('.gridSquare');
+
+    squares.forEach((square) => {
+        square.style.border = (gridOn ? "1px solid gray" : "0px");
     })
 }
 
