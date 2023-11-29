@@ -36,7 +36,7 @@ a {
     color: white;
 }
 
-.gridContainerContainer {
+.gridSection {
     display: flex;
     
     align-content: center;
@@ -44,40 +44,23 @@ a {
 }
 
 .gridContainer {
-    /*
-    display: flex;
-    flex-direction: column;
-    
 
-    justify-content: center;
-    align-items: center;
-    */
-
-    border: 1px solid black;
-    background-color: silver;
 
     height: 100%;
     width: 100%;
     /*
     max-width: 1024px;
     max-height: 1024px;
-    aspect-ratio: 1/1;
     */
 
     max-height: 70vh;
     max-width: 70vh;
+    aspect-ratio: 1/1;
 
     margin: 0;
-    
-    /*flex: 1;
-
-    max-height: 80vw;
-    max-width: 80vw;
-    aspect-ratio: 1/1;
 
     border: 1px solid black;
     background-color: silver;
-    */ 
     
 
 }
@@ -111,6 +94,7 @@ a {
     font-size: 8px;
 
     background-color: silver;
+    border: 1px solid gray;
 
     /*
     flex-basis: 100%;
