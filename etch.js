@@ -36,7 +36,8 @@ gridButton.addEventListener('click', () => {
 
 let clearButton = document.querySelector("#CLEAR");
 clearButton.addEventListener('click', () => {
-    ClearGrid();
+    if (canClear)
+        ClearGrid();
 })
 
 function createGrid(numSquares) {
